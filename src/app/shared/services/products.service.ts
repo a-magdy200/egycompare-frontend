@@ -1,49 +1,57 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Http } from '@angular/http';
 import { ToastrService } from 'ngx-toastr';
-import {BaseProduct, Product, StoreProduct} from '../classes/Product';
+import { Product } from '../classes/product';
 import { BehaviorSubject, Observable, of, Subscriber} from 'rxjs';
 import { map, filter, scan } from 'rxjs/operators';
 import 'rxjs/add/operator/map';
-import {ProductsResponse} from '../classes/response';
-import {ActivatedRoute} from '@angular/router';
 
 // Get product from Localstorage
+let products = JSON.parse(localStorage.getItem("compareItem")) || [];
 
 @Injectable()
 
 export class ProductsService {
+  
+  public currency : string = 'USD';
+  public catalogMode : boolean = false;
+  
+  public compareProducts : BehaviorSubject<Product[]> = new BehaviorSubject([]);
+  public observer   :  Subscriber<{}>;
 
-  public currency = 'USD';
-  public catalogMode = false;
-
-  // public compareProducts: BehaviorSubject<BaseProduct[]> = new BehaviorSubject([]);
-  public observer:  Subscriber<{}>;
-  private compareCategory: string = '';
-
-  // Initialize
-  constructor(private http: HttpClient, private toastrService: ToastrService, private route: ActivatedRoute) {
-     // this.compareProducts.subscribe(_products => localStorage.setItem('compareItem', JSON.stringify(_products)));
+  // Initialize 
+  constructor(private http: Http,private toastrService: ToastrService) { 
+     this.compareProducts.subscribe(products => products = products);
   }
 
   // Observable Product Array
-  private products(): Observable<any> {
-     return this.http.get('assets/data/jsons/products/product.json');
+  private products(): Observable<Product[]> {
+     return this.http.get('assets/data/products.json').map((res:any) => res.json())
   }
-  public getCategories() {
-    return this.http.get('assets/data/jsons/categories.json');
-  }
+
   // Get Products
   public getProducts(): Observable<Product[]> {
     return this.products();
   }
-  public getProduct(slug: string): Observable<Product> {
-    return this.http.get<Product>('assets/data/jsons/product-id.json');
-  }
-  public getProductsByCategory(category: string, page: number): Observable<ProductsResponse> {
-    return this.http.get<ProductsResponse>('assets/data/jsons/category-products.json');
+
+  // Get Products By Id
+  public getProduct(id: number): Observable<Product> {
+    return this.products().pipe(map(items => { return items.find((item: Product) => { return item.id === id; }); }));
   }
 
+   // Get Products By category
+  public getProductByCategory(category: string): Observable<Product[]> {
+    return this.products().pipe(map(items => 
+       items.filter((item: Product) => {
+         if(category == 'all')
+            return item
+         else
+            return item.category === category; 
+        
+       })
+     ));
+  }
+  
    /*
       ---------------------------------------------
       ----------  Compare Product  ----------------
@@ -51,51 +59,42 @@ export class ProductsService {
    */
 
   // Get Compare Products
-  public getCompareProducts(): BaseProduct[] {
-    return JSON.parse(localStorage.getItem('compareItem'));
+  public getComapreProducts(): Observable<Product[]> {
+    const itemsStream = new Observable(observer => {
+      observer.next(products);
+      observer.complete();
+    });
+    return <Observable<Product[]>>itemsStream;
   }
 
-  // If item is already added In compare
-  public hasProduct(product: BaseProduct): boolean {
-    const products = this.getCompareProducts();
+  // If item is aleready added In compare
+  public hasProduct(product: Product): boolean {
     const item = products.find(item => item.id === product.id);
     return item !== undefined;
   }
 
   // Add to compare
-  public addToCompare(product: BaseProduct): void {
+  public addToCompare(product: Product): Product | boolean {
+    var item: Product | boolean = false;
     if (this.hasProduct(product)) {
-      this.toastrService.info('Product already exists in compare list.');
+      item = products.filter(item => item.id === product.id)[0];
+      const index = products.indexOf(item);
     } else {
-      const category = product.category,
-            products = this.getCompareProducts();
-      console.log(products);
-        if (products.length === 0) {
-          this.compareCategory = category;
-        }
-        if (category === this.compareCategory) {
-          if (products.length < 4) {
-            products.push(product);
-            this.toastrService.success('Added to compare group.');
-          } else {
-            this.toastrService.warning('Maximum 4 products are in compare.');
-          } // toasr services
-        } else {
-          this.toastrService.warning('You cannot compare items from different categories.');
-        }
-        localStorage.setItem('compareItem', JSON.stringify(products));
-        console.log(this.getCompareProducts());
-        return;
+      if(products.length < 4)
+        products.push(product);
+      else 
+        this.toastrService.warning('Maximum 4 products are in compare.'); // toasr services
     }
+      localStorage.setItem("compareItem", JSON.stringify(products));
+      return item;
   }
 
   // Removed Product
-  public removeFromCompare(product: BaseProduct) {
+  public removeFromCompare(product: Product) {
     if (product === undefined) { return; }
-    const products = this.getCompareProducts();
     const index = products.indexOf(product);
     products.splice(index, 1);
-    localStorage.setItem('compareItem', JSON.stringify(products));
+    localStorage.setItem("compareItem", JSON.stringify(products));
   }
-
+   
 }
