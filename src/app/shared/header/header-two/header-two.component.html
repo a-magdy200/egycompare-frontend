@@ -1,7 +1,7 @@
 <!-- header start -->
 <header id="sticky" class="sticky">
 	<div class="mobile-fix-option"></div>
-	<div class="top-header" id="top-header-type">
+	<div class="top-header">
 		<div class="container-fluid">
 			<app-topbar></app-topbar>
 		</div>
@@ -16,17 +16,7 @@
 								<a (click)="openNav()">
 									<i class="fa fa-bars sidebar-bar" aria-hidden="true"></i>
 								</a>
-								<div id="mySidenav" class="sidenav">
-								    <a [routerLink]="" class="sidebar-overlay" (click)="closeNav()"></a>
-								    <nav>
-								      <div (click)="closeNav()">
-								        <div class="sidebar-back text-left">
-								          <i class="fa fa-angle-left pr-2" aria-hidden="true"></i> Back
-								        </div>
-								      </div>
-										<app-left-menu></app-left-menu>
-									</nav>
-								</div>
+								<app-left-menu></app-left-menu>
 							</div>
 							<div class="main-menu-right">
 								<app-navbar></app-navbar>

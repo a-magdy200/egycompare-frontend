@@ -17,10 +17,7 @@ export const MENUITEMS: Menu[] = [
 		      	{ path: '/home/left-sidebar/collection/all', title: 'bottom',  type: 'link' },
 		      	{ path: '/home/left-sidebar/collection/all', title: 'ethic wear',  type: 'link' },
 		      	{ path: '/home/left-sidebar/collection/all', title: 'sports wear',  type: 'link' },
-		      	{ path: '/home/left-sidebar/collection/all', title: 'shirts',  type: 'link' },
-		        { path: '/home/left-sidebar/collection/all', title: 'bottom',  type: 'link' },
-		      	{ path: '/home/left-sidebar/collection/all', title: 'ethic wear',  type: 'link' },
-		      	{ path: '/home/left-sidebar/collection/all', title: 'sports wear',  type: 'link' }
+		      	{ path: '/home/left-sidebar/collection/all', title: 'shirts',  type: 'link' }
 	      	]
 	      },
 	      { 
@@ -29,9 +26,6 @@ export const MENUITEMS: Menu[] = [
 		      	{ path: '/home/left-sidebar/collection/all', title: 'skirts',  type: 'link' },
 		      	{ path: '/home/left-sidebar/collection/all', title: 'westarn wear',  type: 'link' },
 		      	{ path: '/home/left-sidebar/collection/all', title: 'ethic wear',  type: 'link' },
-		      	{ path: '/home/left-sidebar/collection/all', title: 'bottom',  type: 'link' },
-		      	{ path: '/home/left-sidebar/collection/all', title: 'ethic wear',  type: 'link' },
-		      	{ path: '/home/left-sidebar/collection/all', title: 'sports wear',  type: 'link' },
 		      	{ path: '/home/left-sidebar/collection/all', title: 'sports wear',  type: 'link' },
 		      	{ path: '/home/left-sidebar/collection/all', title: 'bottom wear',  type: 'link' }
 	      	]

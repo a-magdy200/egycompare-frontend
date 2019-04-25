@@ -19,14 +19,14 @@ import * as $ from 'jquery';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
-   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
+   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
-    DemoComponent
+    DemoComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,7 +49,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     }),
     RouterModule.forRoot(rootRouterConfig, { useHash: false, anchorScrolling: 'enabled', scrollPositionRestoration: 'enabled' })
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: MyHttpInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

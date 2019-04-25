@@ -1,4 +1,4 @@
-import { Component, Inject, HostListener, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Inject, HostListener, OnInit } from '@angular/core';
 import { LandingFixService } from '../../services/landing-fix.service';
 import { DOCUMENT } from '@angular/platform-browser';
 import { WINDOW } from '../../services/windows.service';
@@ -10,38 +10,36 @@ declare var $: any;
 @Component({
   selector: 'app-header-one',
   templateUrl: './header-one.component.html',
-  styleUrls: ['./header-one.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./header-one.component.scss']
 })
 export class HeaderOneComponent implements OnInit {
-  
+
   public shoppingCartItems  :   CartItem[] = [];
-  
+
   constructor(@Inject(DOCUMENT) private document: Document,
-    @Inject(WINDOW) private window,private fix: LandingFixService, private cartService: CartService) { 
+    @Inject(WINDOW) private window,private fix: LandingFixService, private cartService: CartService) {
     this.cartService.getItems().subscribe(shoppingCartItems => this.shoppingCartItems = shoppingCartItems);
   }
 
-  ngOnInit() { 
-    $.getScript('assets/js/menu.js');
+  ngOnInit() {
+
   }
 
   openNav() {
   	this.fix.addNavFix();
   }
 
-  closeNav() {
-     this.fix.removeNavFix();
-  }
-
   // @HostListener Decorator
-  @HostListener("window:scroll", [])
+  @HostListener('window:scroll', [])
   onWindowScroll() {
     let number = this.window.pageYOffset || this.document.documentElement.scrollTop || this.document.body.scrollTop || 0;
-      if (number >= 300) { 
-        this.document.getElementById("sticky").classList.add('fixed');
+      const header = $('#sticky');
+      if (number >= header.height()) {
+        header.addClass('fixed');
+        $('body').css('margin-top', header.height() + 'px');
       } else {
-        this.document.getElementById("sticky").classList.remove('fixed');
+        header.removeClass('fixed');
+        $('body').css('margin-top', '0');
       }
   }
 

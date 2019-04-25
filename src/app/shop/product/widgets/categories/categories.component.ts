@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import * as $ from 'jquery';
+import {BaseCategory, ProductCategory} from '../../../../shared/classes/category';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-categories',
@@ -8,14 +10,18 @@ import * as $ from 'jquery';
 })
 export class CategoriesComponent implements OnInit {
 
-  constructor() { }
-  
+  @Input() categories: ProductCategory[];
+  @Input() parentCategory: BaseCategory[];
+  public parentCategoriesStyle: any;
+  private isSingleProduct: boolean = false;
+  constructor(private route: ActivatedRoute) { }
+
   // collapse toggle
   ngOnInit() {
     $('.collapse-block-title').on('click', function(e) {
-        e.preventDefault;
-        var speed = 300;
-        var thisItem = $(this).parent(),
+        e.preventDefault();
+        const speed = 300;
+        const thisItem = $(this).parent(),
           nextLevel = $(this).next('.collection-collapse-block-content');
         if (thisItem.hasClass('open')) {
           thisItem.removeClass('open');
@@ -25,11 +31,25 @@ export class CategoriesComponent implements OnInit {
           nextLevel.slideDown(speed);
         }
     });
+    if (this.parentCategory) {
+      this.parentCategoriesStyle = this.isString() ? '-10px 0px 0px 10px' : '-10px 0px 0px ' + this.parentCategory.length * 3 + 'px';
+    }
+    this.route.params.subscribe( params => {
+      if (!params['category']) {
+        this.isSingleProduct = true;
+      }
+    });
   }
 
+  isString() {
+    return this.parentCategory.length === 1;
+  }
+  isParentArray() {
+    return this.parentCategory.length > 1;
+  }
   // For mobile view
   public mobileFilterBack() {
-     $('.collection-filter').css("left", "-365px");
+     $('.collection-filter').css('left', '-365px');
   }
 
 }

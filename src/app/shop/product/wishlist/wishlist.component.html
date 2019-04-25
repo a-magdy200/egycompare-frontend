@@ -34,7 +34,6 @@
             <tr class="table-head">
               <th scope="col">image</th>
               <th scope="col">product name</th>
-              <th scope="col">price</th>
               <th scope="col">availability</th>
               <th scope="col">action</th>
             </tr>
@@ -68,10 +67,7 @@
                 </div>
               </td>
               <td>
-                <h2>{{ item.price | currency:productsService?.currency:'symbol' }}</h2>
-              </td>
-              <td>
-                <p>in stock</p>
+                <p>{{instock(item) ? 'in stock' : 'out of stock'}}</p>
               </td>
               <td>
                 <a [routerLink]="" (click)="removeItem(item)" class="icon mr-3">

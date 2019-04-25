@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from '../../../../shared/classes/product';
+import { Product } from '../../../../shared/classes/Product';
 import { ProductsService } from '../../../../shared/services/products.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { ProductsService } from '../../../../shared/services/products.service';
 export class RelatedProductsComponent implements OnInit {
 
   public products: Product[] = [];
-  
+
   constructor(private productsService: ProductsService) { }
 
   ngOnInit() {

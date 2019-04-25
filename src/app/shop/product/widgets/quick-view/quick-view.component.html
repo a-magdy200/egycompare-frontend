@@ -1,5 +1,5 @@
 <!-- Quick-view modal popup start-->
-<div class="modal fade bd-example-modal-lg theme-modal quickviewm" [id]="'quick-view'+product.id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" *ngFor="let product of products">
+<div *ngIf="product" class="modal fade bd-example-modal-lg theme-modal quickviewm" id="quick-view" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
     <div class="modal-content quick-view-modal">
       <div class="modal-body">
@@ -15,19 +15,19 @@
             <div class="col-lg-6 rtl-text">
               <div class="product-right">
                 <h2>{{product.name}}</h2>
-                <h3>{{product.price | currency:productsService?.currency:'symbol'}} <del><span class="money">{{product.salePrice | currency:productsService?.currency:'symbol'}}</span></del> </h3>
+                <h3>{{product.minimumPrice | currency:productsService?.currency:'symbol'}} - {{product.maximumPrice | currency:productsService?.currency:'symbol'}}<del><span class="money">{{product.salePrice | currency:productsService?.currency:'symbol'}}</span></del> </h3>
                 <ul class="color-variant" *ngIf="product.variants">
-                  <li [class]="variant.color" [class.active]="selectedColor == variant.images" (click)="changeVariantImage(variant.images)" *ngFor="let variant of product.variants"></li>
+                  <li [class]="variant.color" [class.active]="selectedColor == variant.image" (click)="changeVariantImage(variant.image)" *ngFor="let variant of product.variants"></li>
                 </ul>
                 <div class="border-product">
                   <h6 class="product-title">product details</h6>
-                  <p>{{product.shortDetails}}</p>
+                  <p>{{product.short_description}}</p>
                 </div>
                 <div class="product-description border-product">
-                  <div class="size-box" *ngIf="product.size">
-                    <ul>
-                      <li [ngClass]="{'active': selectedSize == size}" *ngFor="let size of product.size">
-                        <a [routerLink]="" (click)="changeVariantSize(size)">{{size}}</a>
+                  <div class="stores-box mb-2">
+                    <ul class="list-unstyled">
+                      <li class="d-block" [ngClass]="{'font-weight-bold': selectedStore === store}" *ngFor="let store of product.stores">
+                        <a [routerLink]="" (click)="changeStore(store)">{{store.name}} - {{store.price}}L.E</a>
                       </li>
                     </ul>
                   </div>
@@ -39,7 +39,7 @@
                             <i class="ti-angle-left"></i>
                         </button>
                       </span>
-                      <input type="text" name="quantity" disabled class="form-control input-number" value="{{counter}}">
+                      <input type="text" name="quantity" class="form-control input-number" value="{{counter}}">
                       <span class="input-group-prepend">
                         <button type="button" class="btn quantity-right-plus" (click)="increment()" data-type="plus" data-field="">
                             <i class="ti-angle-right"></i>
@@ -49,8 +49,8 @@
                   </div>
                 </div>
                 <div class="product-buttons">
-                  <a [routerLink]="" (click)="addToCart(product, counter)" class="btn btn-solid" >add to cart</a>
-                  <a [routerLink]="['/home/left-sidebar/product', product.id]" class="btn btn-solid">view detail</a>
+                  <a [routerLink]="" (click)="addToCart(product, counter, selectedStore)" class="btn btn-solid" [class.disabled]="!selectedStore">add to cart</a>
+                  <a [routerLink]="['/product', product.slug]" class="btn btn-solid" [class.disabled]="counter > product.stock">view detail</a>
                 </div>
               </div>
             </div>

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Product } from '../../../shared/classes/product';
-declare var $: any;
+import { Product } from '../../../shared/classes/Product';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-product-tab',

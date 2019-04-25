@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ProductTags, TagFilter } from '../../../../../shared/classes/product';
+import {Brand} from '../../../../../shared/classes/brand';
 declare var $: any;
 
 @Component({
@@ -8,23 +8,23 @@ declare var $: any;
   styleUrls: ['./brand.component.scss']
 })
 export class BrandComponent implements OnInit {
-  
+
   // Using Input nad Output EventEmitter
-  @Input()  tagsFilters : ProductTags[] = [];
-  @Output() tagFilters  : EventEmitter<ProductTags[]> = new EventEmitter<ProductTags[]>();
-  
+  @Input()  brandsFilters : Brand[];
+  @Output() brandFilters  : EventEmitter<Brand[]> = new EventEmitter<Brand[]>();
+
   // Array
   public checkedTagsArray: any[] = [];
-  
+
   constructor() { }
 
-  ngOnInit() {  
-  	  this.tagFilters.emit(this.checkedTagsArray);   // Pass value Using emit 
-      $('.collapse-block-title').on('click', function(e) {
-        e.preventDefault;
-        var speed = 300;
-        var thisItem = $(this).parent(),
-          nextLevel = $(this).next('.collection-collapse-block-content');
+  ngOnInit() {
+    this.brandFilters.emit(this.checkedTagsArray);   // Pass value Using emit
+      $('.brands-filter-block').on('click', function(e) {
+        e.preventDefault();
+        const speed = 300;
+        const thisItem = $(this).parent(),
+              nextLevel = $(this).next('.collection-collapse-block-content');
         if (thisItem.hasClass('open')) {
           thisItem.removeClass('open');
           nextLevel.slideUp(speed);
@@ -36,14 +36,13 @@ export class BrandComponent implements OnInit {
   }
 
   // value checked call this function
-  checkedFilter(event){
-      let index = this.checkedTagsArray.indexOf(event.target.value);  // checked and unchecked value
-       if (event.target.checked)   
-           this.checkedTagsArray.push(event.target.value); // push in array cheked value
-        else 
-           this.checkedTagsArray.splice(index,1);  // removed in array unchecked value           
+  checkedFilter(event) {
+      const index = this.checkedTagsArray.indexOf(event.target.value);  // checked and unchecked value
+       if (event.target.checked) {
+         this.checkedTagsArray.push(event.target.value); // push in array cheked value
+       } else {
+         this.checkedTagsArray.splice(index, 1); // removed in array unchecked value
+       }
+       this.brandFilters.emit(this.checkedTagsArray);
   }
-
-  
-
 }

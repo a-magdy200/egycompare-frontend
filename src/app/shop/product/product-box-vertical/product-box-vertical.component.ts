@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Product } from '../../../shared/classes/product';
+import {Product, StoreProduct} from '../../../shared/classes/Product';
 import { ProductsService } from '../../../shared/services/products.service';
 import { WishlistService } from '../../../shared/services/wishlist.service';
 import { CartService } from '../../../shared/services/cart.service';
@@ -15,17 +15,17 @@ export class ProductBoxVerticalComponent implements OnInit {
 
   @Input() product: Product;
 
-  public variantImage       :   any = ''; 
+  public variantImage       :   any = '';
 
   constructor(private router: Router, public productsService: ProductsService,
-    private wishlistService: WishlistService, private cartService: CartService) { 
+    private wishlistService: WishlistService, private cartService: CartService) {
   }
 
   ngOnInit() { }
 
   // Add to cart
-  public addToCart(product: Product,  quantity: number = 1) {
-    this.cartService.addToCart(product,quantity);
+  public addToCart(product: Product, quantity: number = 1, store: StoreProduct) {
+    this.cartService.addToCart(product, quantity, store);
   }
 
   // Add to compare
@@ -41,6 +41,6 @@ export class ProductBoxVerticalComponent implements OnInit {
   // Change variant images
   public changeVariantImage(image) {
     this.variantImage = image;
-  }  
+  }
 
 }

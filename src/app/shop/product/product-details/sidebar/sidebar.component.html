@@ -1,6 +1,6 @@
 <!-- Categories List -->
 <div class="collection-filter-block">
-    <app-categories></app-categories>
+    <app-categories  *ngIf="categories.length" [parentCategory]="categories" [categories]="[]"></app-categories>
 </div>
 <!-- End Categories List -->
   <div class="collection-filter-block">
@@ -61,5 +61,5 @@
     </div>
 </div>
 <!-- side-bar single product slider start -->
-<app-new-product></app-new-product>
+<!--<app-new-product></app-new-product>-->
 <!-- side-bar single product slider end -->

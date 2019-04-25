@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Product } from '../../shared/classes/product';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {BaseProduct, CalculatorProduct, Product, StoreProduct} from '../../shared/classes/Product';
 import { CartItem } from '../../shared/classes/cart-item';
 import { ProductsService } from '../../shared/services/products.service';
 import { WishlistService } from '../../shared/services/wishlist.service';
@@ -14,37 +14,43 @@ import { Observable, of } from 'rxjs';
 })
 
 export class ProductComponent implements OnInit {
-  
-  @Input() product : Product;
 
-  public variantImage  :  any = ''; 
-  public selectedItem  :  any = '';
+  @Input() product: BaseProduct;
+  @Output() productSlug: EventEmitter<string> = new EventEmitter();
+  public variantImage: any = '';
+  public selectedItem: any = '';
 
-  constructor(private router: Router, public productsService: ProductsService, 
-    private wishlistService: WishlistService, private cartService: CartService) { 
+  constructor(private router: Router, public productsService: ProductsService,
+    private wishlistService: WishlistService, private cartService: CartService, private route: ActivatedRoute) {
   }
 
-  ngOnInit() {  }
+  ngOnInit() { }
 
+  public openModal() {
+    console.log(this.product.slug);
+    this.productSlug.emit(this.product.slug);
+  }
   // Add to cart
-  public addToCart(product: Product,  quantity: number = 1) {
-    this.cartService.addToCart(product,quantity);
+  public addToCart(store: StoreProduct) {
+    this.cartService.addToCart(this.product, 1, store);
   }
 
   // Add to compare
-  public addToCompare(product: Product) {
-     this.productsService.addToCompare(product);
+  public addToCompare(product: BaseProduct) {
+    this.productsService.addToCompare(product);
   }
 
   // Add to wishlist
-  public addToWishlist(product: Product) {
-     this.wishlistService.addToWishlist(product);
+  public addToWishlist(product: BaseProduct) {
+    this.productsService.getProduct(product.slug).subscribe( (productDetailed: Product) => {
+     this.wishlistService.addToWishlist(productDetailed);
+    });
   }
- 
+
  // Change variant images
   public changeVariantImage(image) {
      this.variantImage = image;
-     this.selectedItem = image; 
-  }  
+     this.selectedItem = image;
+  }
 
 }
