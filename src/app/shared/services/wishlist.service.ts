@@ -1,23 +1,23 @@
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { Product } from '../classes/product';
+import {Product} from '../classes/Product';
 import { BehaviorSubject, Observable, Subscriber } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
 // Get product from Localstorage
-let products = JSON.parse(localStorage.getItem("wishlistItem")) || [];
+let products = JSON.parse(localStorage.getItem('wishlistItem')) || [];
 
 @Injectable({
   providedIn: 'root'
 })
 export class WishlistService {
-  
+
   // wishlist array
   public wishlistProducts: BehaviorSubject<Product[]> = new BehaviorSubject([]);
   public observer   :  Subscriber<{}>;
 
-  // Initialize 
-  constructor(private toastrService: ToastrService) { 
+  // Initialize
+  constructor(private toastrService: ToastrService) {
     this.wishlistProducts.subscribe(products => products = products);
   }
 
@@ -45,9 +45,9 @@ export class WishlistService {
     } else {
       products.push(product);
     }
-      this.toastrService.success('This product added to Wishlist.'); // toasr services
-      localStorage.setItem("wishlistItem", JSON.stringify(products));
-      return item;
+    this.toastrService.success('This product added to Wishlist.'); // toasr services
+    localStorage.setItem('wishlistItem', JSON.stringify(products));
+    return item;
   }
 
   // Removed Product
@@ -55,8 +55,6 @@ export class WishlistService {
     if (product === undefined) { return; }
     const index = products.indexOf(product);
     products.splice(index, 1);
-    localStorage.setItem("wishlistItem", JSON.stringify(products));
+    localStorage.setItem('wishlistItem', JSON.stringify(products));
   }
-  
-
 }

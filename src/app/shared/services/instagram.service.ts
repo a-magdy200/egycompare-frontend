@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, RequestOptions } from '@angular/http';
 import { BehaviorSubject, Observable, of} from 'rxjs';
 import { map, filter, scan } from 'rxjs/operators';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InstagramService {
-  
-  // Initialize 
-  constructor(private http: Http) { }
+
+  // Initialize
+  constructor(private http: HttpClient) { }
 
   // Instagram Array
   public getInstagramData() {

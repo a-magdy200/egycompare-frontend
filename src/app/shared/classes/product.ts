@@ -1,38 +1,49 @@
-// Product Colors
-export type ProductColor = 'white' | 'black' | 'red' | 'green' | 'purple' | 'yellow' | 'blue' | 'gray' | 'orange' | 'pink';
+import {BaseCategory} from './category';
 
-// Product Size
-export type ProductSize = 'M' | 'L' | 'XL';
-
-// Product Tag
-export type ProductTags = 'nike' | 'puma' | 'lifestyle' | 'caprese';
-
-// Product
-export interface Product {
-  id?: number;
-  name?: string;
-  price?: number;
-  salePrice?: number;
-  discount?: number;
-  pictures?: string;
-  shortDetails?: string;
-  description?: string;
-  stock?: number;
-  new?: boolean;
-  sale?: boolean;
-  category?: string;
+export interface StoreProduct {
+  id: number;
+  name: string;
+  logo: string;
+  price: number;
+  offer: string;
+  warranty: string;
+  stock: string;
+  state: string;
   colors?: ProductColor[];
-  size?: ProductTags[];
-  tags?: ProductSize[];
-  variants?: any[];
 }
-
+export interface ProductFilter {
+  name: string;
+  value: string;
+}
 // Color Filter
-export interface ColorFilter {
-  color?: ProductColor;
-}
+export const ColorsFilter = ['white' , 'black' , 'red' , 'green' , 'purple' , 'yellow' , 'blue' , 'gray' , 'orange' , 'pink'];
+export type ProductColor = 'white' |  'black' | 'red' | 'green' | 'purple' | 'yellow' | 'blue' | 'gray' | 'orange' | 'pink';
 
-// Tag Filter
-export interface TagFilter {
-  tag?: ProductTags
+export interface ProductVariant {
+  color: string;
+  image: string;
+}
+export interface Product extends BaseProduct {
+  parent_categories: BaseCategory[];
+  short_description: string;
+  long_description: string;
+  stores: StoreProduct[];
+}
+export interface CalculatorProduct extends BaseProduct {
+  store ?: StoreProduct;
+}
+export interface BaseProduct {
+  id: number;
+  name: string;
+  slug: string;
+  pictures: string[];
+  minimumPrice: number;
+  maximumPrice: number;
+  variants: ProductVariant[];
+  colors?: ProductColor[];
+  rate: number;
+  number_of_reviews: number;
+  filter_options: ProductFilter[];
+  brand: string;
+  category: string;
 }

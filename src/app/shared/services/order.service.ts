@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Product } from '../classes/product';
+import { Product } from '../classes/Product';
 import { CartItem } from '../classes/cart-item';
 import { Order } from '../classes/order';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 
 export class OrderService {
-  
+
   // Array
   public OrderDetails;
 
