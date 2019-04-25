@@ -22,7 +22,7 @@ export class HeaderThreeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    $.getScript('assets/js/menu.js');
+    
   }
 
   ngOnDestroy() {
@@ -31,10 +31,6 @@ export class HeaderThreeComponent implements OnInit, OnDestroy {
 
   openNav() {
   	this.fix.addNavFix();
-  }
-
-  closeNav() {
-     this.fix.removeNavFix();
   }
 
   // @HostListener Decorator

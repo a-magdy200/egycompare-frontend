@@ -4,14 +4,14 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="page-title">
-                    <h2>our collection</h2>
+                    <h2>our categories</h2>
                 </div>
             </div>
             <div class="col-sm-6">
                 <nav aria-label="breadcrumb" class="theme-breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a [routerLink]="'/home/one'">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">collection</li>
+                        <li class="breadcrumb-item active" aria-current="page">Categories</li>
                     </ol>
                 </nav>
             </div>
@@ -23,93 +23,12 @@
 <section class="collection section-b-space">
     <div class="container">
         <div class="row partition-collection">
-            <div class="col-lg-3 col-md-6">
+            <div class="col-lg-3 col-md-6 mb-3" *ngFor="let category of categories">
                 <div class="collection-block">
-                    <img src="assets/images/collection/1.jpg" class="img-fluid" alt="">
+                    <img src="{{category.image}}" class="img-fluid" alt="">
                     <div class="collection-content">
-                        <h4>(20 products)</h4>
-                        <h3>fashion</h3>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry....</p>
-                        <a [routerLink]="" class="btn btn-outline">shop now !</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="collection-block">
-                    <img src="assets/images/collection/3.jpg" class="img-fluid" alt="">
-                    <div class="collection-content">
-                        <h4>(20 products)</h4>
-                        <h3>fashion</h3>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry....</p>
-                        <a [routerLink]="" class="btn btn-outline">shop now !</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="collection-block">
-                    <img src="assets/images/collection/5.jpg" class="img-fluid" alt="">
-                    <div class="collection-content">
-                        <h4>(20 products)</h4>
-                        <h3>fashion</h3>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry....</p>
-                        <a [routerLink]="" class="btn btn-outline">shop now !</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="collection-block">
-                    <img src="assets/images/collection/6.jpg" class="img-fluid" alt="">
-                    <div class="collection-content">
-                        <h4>(20 products)</h4>
-                        <h3>fashion</h3>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry....</p>
-                        <a [routerLink]="" class="btn btn-outline">shop now !</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row partition-collection section-t-space">
-            <div class="col-lg-3 col-md-6">
-                <div class="collection-block">
-                    <img src="assets/images/collection/7.jpg" class="img-fluid" alt="">
-                    <div class="collection-content">
-                        <h4>(20 products)</h4>
-                        <h3>fashion</h3>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry....</p>
-                        <a [routerLink]="" class="btn btn-outline">shop now !</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="collection-block">
-                    <img src="assets/images/collection/8.jpg" class="img-fluid" alt="">
-                    <div class="collection-content">
-                        <h4>(20 products)</h4>
-                        <h3>fashion</h3>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry....</p>
-                        <a [routerLink]="" class="btn btn-outline">shop now !</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="collection-block">
-                    <img src="assets/images/collection/9.jpg" class="img-fluid" alt="">
-                    <div class="collection-content">
-                        <h4>(20 products)</h4>
-                        <h3>fashion</h3>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry....</p>
-                        <a [routerLink]="" class="btn btn-outline">shop now !</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="collection-block">
-                    <img src="assets/images/collection/11.jpg" class="img-fluid" alt="">
-                    <div class="collection-content">
-                        <h4>(20 products)</h4>
-                        <h3>fashion</h3>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry....</p>
-                        <a [routerLink]="" class="btn btn-outline">shop now !</a>
+                        <h3>{{category.name}}</h3>
+                        <a [routerLink]="['/categories', category.id]" class="btn btn-outline">Browse</a>
                     </div>
                 </div>
             </div>

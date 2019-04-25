@@ -7,13 +7,18 @@
   <h3 class="collapse-block-title">Category</h3>
   <div class="collection-collapse-block-content">
     <div class="collection-brand-filter">
-      <ul class="category-list">
-        <li><a [routerLink]="'/home/left-sidebar/collection/women'">Womens Fashion</a></li>
-        <li><a [routerLink]="'/home/left-sidebar/collection/men'">Mens Fashion</a></li>
-        <li><a [routerLink]="'/home/left-sidebar/collection/watch'">Mens Watch</a></li>
-        <li><a [routerLink]="'/home/left-sidebar/collection/beauty'">Beauty Products</a></li>
-        <li><a [routerLink]="'/home/left-sidebar/collection/furniture'">Furnitures</a></li>
-        <li><a [routerLink]="'/home/left-sidebar/collection/flower'">Flowers Port</a></li>
+      <h4 class="parent-category mt-2 font-weight-bold" *ngIf="parentCategory && isString()">{{parentCategory.name}}</h4>
+      <ul *ngIf="parentCategory && isParentArray()" class="list-unstyled category-list parent-category">
+        <li *ngFor="let parent of parentCategory; index as i" [style.margin-left]="i * 3 + 'px'">
+          <a *ngIf="i < parentCategory.length - 1" [routerLink]="['/categories', parent.slug]">{{parent.name}}</a>
+          <h5 *ngIf="!isSingleProduct && i === parentCategory.length - 1">{{parent.name}}</h5>
+          <a *ngIf="isSingleProduct && i === parentCategory.length - 1" [routerLink]="['/categories', parent.slug]">{{parent.name}}</a>
+        </li>
+      </ul>
+      <ul [style.margin]="parentCategory? parentCategoriesStyle : '0px'" class="category-list">
+        <li *ngFor="let category of categories">
+          <a [routerLink]="['/products', category.slug]">{{category.name}}</a>
+        </li>
       </ul>
     </div>
   </div>

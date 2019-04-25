@@ -1,31 +1,40 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ProductColor, ColorFilter } from '../../../../../shared/classes/product';
-
+import { ColorsFilter } from '../../../../../shared/classes/Product';
+import * as $ from 'jquery';
 @Component({
   selector: 'app-color',
   templateUrl: './color.component.html',
   styleUrls: ['./color.component.scss']
 })
 export class ColorComponent implements OnInit {
-  
-  public activeItem : any = '';
+
+  public activeItems: any[] = [];
 
   // Using Input and Output EventEmitter
-  @Input()  colorsFilters  :  ColorFilter[] = [];
-  @Output() colorFilters   :  EventEmitter<ColorFilter[]> = new EventEmitter<ColorFilter[]>();
+  @Output() colorFilters:  EventEmitter<any[]> = new EventEmitter();
 
+  public colors = ColorsFilter;
   constructor() { }
-  
+
   ngOnInit() {  }
 
-  // Click to call function 
-  public changeColor(colors: ColorFilter) {
-    this.activeItem = colors.color
-    if(colors.color) {
-      this.colorFilters.emit([colors]);
-    } else {
-      this.colorFilters.emit([]);
-    }
+  /*
+  * products
+  * categories
+  * price range (min max)
+  * category filters
+  * */
+  // Click to call function
+  public changeColor(e: any) {
+    const element = $(e.target);
+    const colors = [];
+    element.toggleClass('active');
+    const activeItems = element.parent().children('.active');
+    activeItems.map( elementIndex => {
+      colors.push(activeItems[elementIndex].getAttribute('data-color'));
+    });
+    this.activeItems = colors;
+    this.colorFilters.emit(this.activeItems);
   }
 
 }

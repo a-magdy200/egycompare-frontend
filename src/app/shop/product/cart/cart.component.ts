@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from '../../../shared/classes/product';
+import { Product } from '../../../shared/classes/Product';
 import { CartItem } from '../../../shared/classes/cart-item';
 import { ProductsService } from '../../../shared/services/products.service';
 import { CartService } from '../../../shared/services/cart.service';
@@ -14,7 +14,7 @@ export class CartComponent implements OnInit {
 
   public cartItems          :   Observable<CartItem[]> = of([]);
   public shoppingCartItems  :   CartItem[] = [];
- 
+
   constructor(private productsService: ProductsService,
     private cartService: CartService) { }
 
@@ -22,22 +22,22 @@ export class CartComponent implements OnInit {
   	this.cartItems = this.cartService.getItems();
     this.cartItems.subscribe(shoppingCartItems => this.shoppingCartItems = shoppingCartItems);
   }
- 
+
   // Increase Product Quantity
   public increment(product: any, quantity: number = 1) {
-    this.cartService.updateCartQuantity(product,quantity);
+    this.cartService.updateCartQuantity(product, quantity);
   }
-  
+
   // Decrease Product Quantity
   public decrement(product: any, quantity: number = -1) {
-    this.cartService.updateCartQuantity(product,quantity);
+    this.cartService.updateCartQuantity(product, quantity);
   }
-  
+
   // Get Total
   public getTotal(): Observable<number> {
     return this.cartService.getTotalAmount();
   }
-  
+
   // Remove cart items
   public removeItem(item: CartItem) {
     this.cartService.removeFromCart(item);

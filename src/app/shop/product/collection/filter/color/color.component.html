@@ -4,8 +4,8 @@
     <div class="collection-collapse-block-content">
         <div class="color-selector">
             <ul>
-              <li [ngClass]="filter.color" [class.active]="activeItem == filter.color" (click)="changeColor(activeItem == filter.color ? {} : filter)" *ngFor="let filter of colorsFilters"></li>
-            </ul>  
+              <li [ngClass]="color" [class.active]="activeItems.indexOf(color) !== -1" [attr.data-color]="color" (click)="changeColor($event)" *ngFor="let color of colors"></li>
+            </ul>
         </div>
     </div>
 </div>

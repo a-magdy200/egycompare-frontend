@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Product } from '../../../../shared/classes/product';
+import {BaseProduct} from '../../../../shared/classes/Product';
 import { ProductsService } from '../../../../shared/services/products.service';
 
 @Component({
@@ -8,13 +8,13 @@ import { ProductsService } from '../../../../shared/services/products.service';
   styleUrls: ['./new-product.component.scss']
 })
 export class NewProductComponent implements OnInit {
-  
-  public products : Product[] = [];	
+
+  public products : BaseProduct[] = [];
 
   constructor(private productsService: ProductsService) { }
 
   ngOnInit() {
-  	this.productsService.getProducts().subscribe(product => this.products = product);
+    this.productsService.getProducts().subscribe(product => this.products = product );
   }
 
 }

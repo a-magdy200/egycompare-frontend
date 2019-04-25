@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { InstagramService } from '../../../shared/services/instagram.service';
+// import { InstagramService } from '../../../shared/services/instagram.service';
 
 @Component({
   selector: 'app-instagram',
@@ -8,13 +8,16 @@ import { InstagramService } from '../../../shared/services/instagram.service';
 })
 
 export class InstagramComponent implements OnInit {
-   
+
   public instagram;
 
-  constructor(private instaService: InstagramService) { }
+  constructor() { }
+  // constructor(private instaService: InstagramService) { }
 
   ngOnInit() {
-      this.instaService.getInstagramData().subscribe(res => { this.instagram = res.json().data });
+
+      // this.instaService.getInstagramData().subscribe(res => { this.instagram = res.json().data; });
+
   }
 
   // Slick slider config

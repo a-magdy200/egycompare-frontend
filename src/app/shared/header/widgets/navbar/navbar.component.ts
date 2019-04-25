@@ -16,6 +16,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
   	this.menuItems = MENUITEMS.filter(menuItem => menuItem);
+  	$.getScript('assets/js/menu.js');
   }
 
 }

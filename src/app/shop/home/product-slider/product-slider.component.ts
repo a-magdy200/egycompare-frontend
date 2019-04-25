@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Product } from '../../../shared/classes/product';
+import { Product } from '../../../shared/classes/Product';
 
 @Component({
   selector: 'app-product-slider',
@@ -7,13 +7,13 @@ import { Product } from '../../../shared/classes/product';
   styleUrls: ['./product-slider.component.scss']
 })
 export class ProductSliderComponent implements OnInit {
-  
+
   @Input() products: Product;
-   
+
   constructor() { }
 
   ngOnInit() { }
-  
+
   // Slick slider config
   public productSlideConfig: any = {
     infinite: true,

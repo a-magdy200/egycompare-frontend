@@ -34,6 +34,7 @@
             <tr class="table-head">
               <th scope="col">image</th>
               <th scope="col">product name</th>
+              <th scope="col">store</th>
               <th scope="col">price</th>
               <th scope="col">quantity</th>
               <th scope="col">action</th>
@@ -69,7 +70,8 @@
                   </div>
                 </div>
               </td>
-              <td><h2>{{ item.product.price | currency:productsService?.currency:'symbol' }}</h2>
+              <td><h2>{{ item.store.name }}</h2></td>
+              <td><h2>{{ item.store.price | currency:productsService?.currency:'symbol' }}</h2>
               </td>
               <td>
                 <div class="qty-box">
@@ -79,7 +81,7 @@
                       <i class="ti-angle-left"></i>
                     </button>
                   </span>
-                    <input type="text" name="quantity" disabled class="form-control input-number" [(ngModel)]="item.quantity">
+                    <input type="text" name="quantity" class="form-control input-number" [(ngModel)]="item.quantity">
                     <span class="input-group-prepend">
                     <button type="button" class="btn quantity-right-plus" (click)="increment(item.product)" data-type="plus" data-field="">
                       <i class="ti-angle-right"></i>
@@ -94,7 +96,7 @@
               </a>
               </td>
               <td>
-                <h2 class="td-color">{{ item.product.price * item.quantity | currency:productsService?.currency:'symbol' }}</h2>
+                <h2 class="td-color">{{ item.store.price * item.quantity | currency:productsService?.currency:'symbol' }}</h2>
               </td>
             </tr>
           </tbody>

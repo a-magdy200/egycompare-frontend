@@ -26,28 +26,39 @@
             <div class="col-lg-12">
                 <h3>create account</h3>
                 <div class="theme-card">
-                    <form class="theme-form">
+                    <form class="theme-form" [formGroup]="registerForm">
                         <div class="form-row">
                             <div class="col-md-6">
-                                <label for="email">First Name</label>
-                                <input type="text" class="form-control" id="fname" placeholder="First Name" required="">
+                                <label for="name">Full Name</label>
+                                <input formControlName="name" type="text" class="form-control" id="name" placeholder="Full Name" required>
                             </div>
                             <div class="col-md-6">
-                                <label for="review">Last Name</label>
-                                <input type="password" class="form-control" id="lname" placeholder="Last Name" required="">
+                                <label for="email">Email</label>
+                                <input formControlName="email" type="email" class="form-control" id="email" placeholder="Email" required>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col-md-6">
-                                <label for="email">email</label>
-                                <input type="text" class="form-control" id="email" placeholder="Email" required="">
+                                <label for="password">Password</label>
+                                <input formControlName="password" type="password" class="form-control" id="password" placeholder="Password" required>
                             </div>
                             <div class="col-md-6">
-                                <label for="review">Password</label>
-                                <input type="password" class="form-control" id="review" placeholder="Enter your password" required="">
+                                <label for="r_password">Password</label>
+                                <input formControlName="repeat_password" type="password" class="form-control" id="r_password" placeholder="Repeat password" required>
                             </div>
-                            <button class="btn btn-solid">create Account</button>
                         </div>
+                      <div class="form-row">
+                        <p class="col-md-6">Gender: </p>
+                        <div class="form-check form-check-inline col-md-3 mr-0">
+                          <label class="form-check-label" for="male">Male</label>
+                          <input formControlName="gender" class="form-check-input ml-2 m-0" type="radio" id="male" value="male" name="gender">
+                        </div>
+                        <div class="form-check form-check-inline col-md-3 mr-0">
+                          <label class="form-check-label" for="female">Female</label>
+                          <input formControlName="gender" class="form-check-input ml-2 m-0" type="radio" id="female" value="female" name="gender">
+                        </div>
+                      </div>
+                      <button (click)="register()" class="btn btn-solid">Create Account</button>
                     </form>
                 </div>
             </div>

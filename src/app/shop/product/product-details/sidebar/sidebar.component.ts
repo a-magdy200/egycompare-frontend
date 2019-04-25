@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {ProductCategory} from '../../../../shared/classes/category';
 
 @Component({
   selector: 'product-details-sidebar',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
+  @Input() categories: ProductCategory[] = [];
   constructor() { }
 
   ngOnInit() {

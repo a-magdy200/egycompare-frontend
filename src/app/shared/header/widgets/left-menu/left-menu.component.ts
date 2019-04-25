@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MENUITEMS, Menu } from './left-menu-items';
-declare var $: any;
+import { LandingFixService } from '../../../services/landing-fix.service';
 
 @Component({
   selector: 'app-left-menu',
@@ -11,10 +11,14 @@ export class LeftMenuComponent implements OnInit {
   
   public menuItems: Menu[];
 
-  constructor() { }
+  constructor(private fix: LandingFixService) { }
 
   ngOnInit() { 
      this.menuItems = MENUITEMS.filter(menuItem => menuItem);
+  }
+
+  closeNav() {
+  	 this.fix.removeNavFix();
   }
 
 }

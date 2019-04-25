@@ -1,0 +1,13 @@
+.action-buttons i {
+  transition: color 0.3s ease-in-out;
+  cursor: pointer;
+  &:hover {
+    color: #ff4c3b;
+  }
+}
+.product-icon > * {
+  flex: 1;
+}
+.stores-table th:first-of-type, .stores-table td:first-of-type {
+  flex-grow: 2;
+}

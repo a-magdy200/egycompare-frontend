@@ -17,23 +17,19 @@ import { OrderByPipe } from './pipes/order-by.pipe';
 import { HeaderOneComponent } from './header/header-one/header-one.component';
 import { HeaderTwoComponent } from './header/header-two/header-two.component';
 import { HeaderThreeComponent } from './header/header-three/header-three.component';
-import { HeaderFourComponent } from './header/header-four/header-four.component';
-import { HeaderFiveComponent } from './header/header-five/header-five.component';
-import { LeftSidebarComponent } from './header/left-sidebar/left-sidebar.component';
-import { TopbarOneComponent } from './header/widgets/topbar/topbar-one/topbar-one.component';
-import { TopbarTwoComponent } from './header/widgets/topbar/topbar-two/topbar-two.component';
+import { TopbarComponent } from './header/widgets/topbar/topbar.component';
 import { NavbarComponent } from './header/widgets/navbar/navbar.component';
 import { SettingsComponent } from './header/widgets/settings/settings.component';
 import { LeftMenuComponent } from './header/widgets/left-menu/left-menu.component';
 import { FooterOneComponent } from './footer/footer-one/footer-one.component';
 import { FooterTwoComponent } from './footer/footer-two/footer-two.component';
-import { FooterThreeComponent } from './footer/footer-three/footer-three.component';
-import { FooterFourComponent } from './footer/footer-four/footer-four.component';
 import { InformationComponent } from './footer/widgets/information/information.component';
 import { CategoriesComponent } from './footer/widgets/categories/categories.component';
 import { WhyWeChooseComponent } from './footer/widgets/why-we-choose/why-we-choose.component';
+import { ContactComponent } from './footer/widgets/contact/contact.component';
 import { CopyrightComponent } from './footer/widgets/copyright/copyright.component';
 import { SocialComponent } from './footer/widgets/social/social.component';
+
 
 @NgModule({
   exports: [
@@ -42,13 +38,8 @@ import { SocialComponent } from './footer/widgets/social/social.component';
     HeaderOneComponent,
     HeaderTwoComponent,
     HeaderThreeComponent,
-    HeaderFourComponent,
-    HeaderFiveComponent,
-    LeftSidebarComponent,
     FooterOneComponent,
     FooterTwoComponent,
-    FooterThreeComponent,
-    FooterFourComponent,
     OrderByPipe
   ],
   imports: [
@@ -60,22 +51,17 @@ import { SocialComponent } from './footer/widgets/social/social.component';
     HeaderOneComponent,
     HeaderTwoComponent,
     HeaderThreeComponent,
-    HeaderFourComponent,
-    HeaderFiveComponent,
-    LeftSidebarComponent,
     FooterOneComponent,
     FooterTwoComponent,
-    FooterThreeComponent,
-    FooterFourComponent,
     OrderByPipe,
     NavbarComponent,
     SettingsComponent,
     LeftMenuComponent,
-    TopbarOneComponent,
-    TopbarTwoComponent,
+    TopbarComponent,
     InformationComponent,
     CategoriesComponent,
     WhyWeChooseComponent,
+    ContactComponent,
     CopyrightComponent,
     SocialComponent
   ],

@@ -13,25 +13,15 @@
 					<div class="menu-left">
 						<div class="navbar">
 							<a (click)="openNav()">
-								<div class="bar-style"> 
+								<div class="bar-style">
 									<i class="fa fa-bars sidebar-bar" aria-hidden="true"></i>
 								</div>
 							</a>
-							<div id="mySidenav" class="sidenav">
-						    <a [routerLink]="" class="sidebar-overlay" (click)="closeNav()"></a>
-						    <nav>
-						      <div (click)="closeNav()">
-						        <div class="sidebar-back text-left">
-						          <i class="fa fa-angle-left pr-2" aria-hidden="true"></i> Back
-						        </div>
-						      </div>
-							  <app-left-menu></app-left-menu>
-							</nav>
-							</div>
+							<app-left-menu></app-left-menu>
 						</div>
 						<div class="brand-logo">
 							<a [routerLink]="['/home/one']">
-								<img src="assets/images/icon/logo.png" class="img-fluid" alt="">
+								<img src="assets/images/icon/logo-6.svg" width="270px" class="img-fluid" alt="">
 							</a>
 						</div>
 					</div>
